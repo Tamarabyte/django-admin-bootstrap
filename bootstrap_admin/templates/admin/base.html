@@ -4,6 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway:400,900">
 
   {% block bootstrap_admin_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap_admin/css/bootstrap.min.css' %}" />
@@ -66,7 +67,7 @@
               {% block branding %}
                 <a href="{% url 'admin:index' %}" class="django-admin-logo">
                   <!-- Django Administration -->
-                  <img src="{% static "bootstrap_admin/img/logo-140x60.png" %}" alt="{{ site_header|default:_('Django administration') }}">
+                  <img src="{% static "bootstrap_admin/img/logo.png" %}" alt="{{ site_header|default:_('Django administration') }}">
                 </a>
               {% endblock branding %}
               {% block filters %}{% endblock filters %}

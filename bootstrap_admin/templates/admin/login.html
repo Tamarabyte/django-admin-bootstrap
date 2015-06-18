@@ -16,79 +16,80 @@
 {% block sidebar_menu %}{% endblock %}
 
 {% block content_container %}
-  <div id="content-main">
-    <div class="login-container">
-      <form action="{{ app_path }}" method="post" id="login-form" class="form form-horizontal" role="form">{% csrf_token %}
-        <a href="{% url 'admin:index' %}">
-          <img alt="{{ site_header|default:_('Django administration') }}" src="{% static "bootstrap_admin/img/logo-140x60.png" %}" class="logo-admin">
-        </a>
-        <fieldset>
-          <legend>
-            {{ site_header|default:_('Django administration') }} - {{ title }}
-          </legend>
+  <div id="content-main" class="container">
 
-          {% if form.errors or form.non_field_errors %}
-            <div role="alert" class="alert alert-danger errornote">
-              {% if form.errors and not form.non_field_errors %}
-                <p>
-                  <strong>
-                    {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-                  </strong>
-                </p>
-              {% endif %}
+    <div id="row col-lg-6 col-md-8 col-sm-12 col-xs-12">
 
-              {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
+
+      <img alt="{{ site_header|default:_('Django administration') }}" src="{% static "bootstrap_admin/img/squirrel.png" %}" class="logo-admin"/>
+      <span class="admin-text">Chitter Admin</span>
+      <div id="login-container">
+
+        <form action="{{ app_path }}" method="post" id="login-form" class="form form-horizontal" role="form">{% csrf_token %}
+          <fieldset>
+
+            {% if form.errors or form.non_field_errors %}
+              <div role="alert" class="alert alert-danger errornote">
+                {% if form.errors and not form.non_field_errors %}
                   <p>
-                    {{ error }}
+                    <strong>
+                      {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+                    </strong>
                   </p>
-                {% endfor %}
-              {% endif %}
+                {% endif %}
 
-              {% if form.errors %}
-                {% for field in form %}
-                  {% for error in field.errors %}
-                    <p class="border-decoration">
-                      <strong><span class="glyphicon glyphicon-asterisk"></span> {{ field.label }}: </strong>{{ error|escape }}
+                {% if form.non_field_errors %}
+                  {% for error in form.non_field_errors %}
+                    <p>
+                      {{ error }}
                     </p>
                   {% endfor %}
-                {% endfor %}
-              {% endif %}
-            </div>
-          {% endif %}
+                {% endif %}
 
-          <div class="row form-row">
-            <div class="col-sm-6 username">
-              <div class="input-group {% if form.username.errors %}has-error{% endif %}">
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-user"></span>
-                </span>
-                {{ form.username|add_class:'form-control'|placeholder:form.username.label }}
-              </div><!-- /input-group -->
-            </div><!-- /.col-sm-6 -->
-            <div class="col-sm-6 password">
-              <div class="input-group {% if form.password.errors %}has-error{% endif %}">
-                <span class="input-group-addon toggle-password">
-                  <span class="glyphicon glyphicon-eye-open"></span>
-                </span>
-                {{ form.password|add_class:'form-control'|placeholder:form.password.label }}
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
-                </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-sm-6 -->
-          </div>
+                {% if form.errors %}
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <p class="border-decoration">
+                        <strong><span class="glyphicon glyphicon-asterisk"></span> {{ field.label }}: </strong>{{ error|escape }}
+                      </p>
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              </div>
+            {% endif %}
 
-          <input type="hidden" name="next" value="{{ next }}" />
+              <div class="row col-sm-12 username">
+                <div class="input-group {% if form.username.errors %}has-error{% endif %}">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                  </span>
+                  {{ form.username|add_class:'form-control'|placeholder:form.username.label }}
+                </div><!-- /input-group -->
+              </div><!-- /.col-sm-6 -->
 
-          {% url 'admin_password_reset' as password_reset_url %}
-          {% if password_reset_url %}
-            <p class="password-reset-link">
-              <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-            </p>
-          {% endif %}
-        </fieldset>
-      </form>
+              <div class="row col-sm-12 password">
+                <div class="input-group {% if form.password.errors %}has-error{% endif %}">
+                  <span class="input-group-addon toggle-password">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                  </span>
+                  {{ form.password|add_class:'form-control'|placeholder:form.password.label }}
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-sm-6 -->
+
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+              <p class="password-reset-link">
+                <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+              </p>
+            {% endif %}
+          </fieldset>
+        </form>
+    </div>
     </div>
 
     <script type="text/javascript">
