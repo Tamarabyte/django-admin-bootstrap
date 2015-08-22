@@ -18,6 +18,7 @@
 {% if not is_popup %}
   {% block breadcrumbs %}
     <ol class="breadcrumb">
+      {% if opts.model_name != 'post' or user.is_superuser %}
       <li class="home">
         <a href="{% url 'admin:index' %}" title="{% trans 'Home' %}"><span class="glyphicon glyphicon-home"></span></a>
       </li>
@@ -26,6 +27,7 @@
           {{ opts.app_config.verbose_name }}
         </a>
       </li>
+      {% endif %}
       <li>
         {% if has_change_permission %}
           <a href="{% url opts|admin_urlname:'changelist' %}">
@@ -56,9 +58,11 @@
       {% endif %}
       <div class="col-sm-9 form-fields">
         <div class="panel panel-default form-panel">
+          {% if opts.model_name != 'post' or user.is_superuser or add %}
           <a href="#" class="form-expand">
             <span class="glyphicon glyphicon-resize-horizontal "></span>
           </a>
+          {% endif %}
           <div class="panel-body">
             {% if errors %}
               <p class="errornote">
@@ -98,7 +102,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-3 form-buttons">
+      {% if opts.model_name != 'post' or user.is_superuser or add %}
+      <div class="col-sm-3 form-buttons" >
         <div data-spy="affix" data-offset-top="125">
           {% if save_on_top %}
             {% block submit_buttons_top %}{% submit_row %}{% endblock %}
@@ -133,6 +138,7 @@
           {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
         </div>
       </div>
+      {% endif %}
     </form>
   </div>
 {% endblock %}
@@ -141,10 +147,15 @@
   <script>
     (function ($) {
       $(document).ready(function(){
+        {% if opts.model_name == 'post' and not user.is_superuser %}
+          $('[name="_continue"]').hide();
+        {% endif %}
+
         $('.vManyToManyRawIdAdminField, .vForeignKeyRawIdAdminField').addClass('form-control');
         $('.form-row input[type="checkbox"]').closest('li')
                                              .addClass('checkbox');
         $('.radiolist li').addClass('radio');
+
 
         $('.form-expand').on('click', function () {
           $form_fields = $('.form-fields');

@@ -356,6 +356,7 @@ fieldset.module > h2:first-child {
 }
 .inline-group .checkbox input {
   margin: 0;
+  position: relative;
 }
 
 /* Calendar widget */
