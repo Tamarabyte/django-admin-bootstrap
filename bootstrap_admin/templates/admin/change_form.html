@@ -27,8 +27,8 @@
           {{ opts.app_config.verbose_name }}
         </a>
       </li>
-      {% endif %}
       <li>
+        {% endif %}
         {% if has_change_permission %}
           <a href="{% url opts|admin_urlname:'changelist' %}">
             {{ opts.verbose_name_plural|capfirst }}

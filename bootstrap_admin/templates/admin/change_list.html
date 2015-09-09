@@ -106,7 +106,6 @@
           <div>{{ cl.formset.management_form }}</div>
         {% endif %}
           {% block result_list %}
-          {% if opts.model_name != 'post' or user.is_superuser %}
             <div class="place-info-actions">
               <div class="progressbar-selected-rows"></div>
             </div>
@@ -124,7 +123,6 @@
                 </div>
               </div>
             </div>
-          {% endif %}
             {% result_list cl %}
             {% if cl.result_count > cl.list_per_page or actions_on_bottom and cl.full_result_count %}
               <div class="panel-body actions-bottom">
