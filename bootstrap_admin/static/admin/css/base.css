@@ -1,10 +1,22 @@
 .admin-text {
-    font-family: 'Raleway';
+    font-family: 'arial';
     font-size: 45px;
     font-weight: 600;
     position: relative;
     bottom: -14px;
     color: #EA5D48;
+}
+
+.add-another, .related-lookup {
+margin-left: 5px;
+display: inline-block;
+}
+
+.related-lookup {
+width: 24px;
+height: 24px;
+background-image: url(../../bootstrap_admin/img/search.png);
+background-repeat: no-repeat;
 }
 
 body {

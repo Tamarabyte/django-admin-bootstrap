@@ -1,5 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_urls admin_static admin_list %}
+{% load admin_extras %}
 
 {% block extrastyle %}
   {{ block.super }}
@@ -39,7 +40,7 @@
 {% if not is_popup %}
   {% block breadcrumbs %}
     <ol class="breadcrumb">
-      {% if opts.model_name != 'post' or user.is_superuser %}
+      {% if opts.model_name != 'post' or not user|is_confessions %}
       <li class="home">
         <a href="{% url 'admin:index' %}" title="{% trans 'Home' %}"><span class="glyphicon glyphicon-home"></span></a>
       </li>
@@ -106,6 +107,7 @@
           <div>{{ cl.formset.management_form }}</div>
         {% endif %}
           {% block result_list %}
+
             <div class="place-info-actions">
               <div class="progressbar-selected-rows"></div>
             </div>
